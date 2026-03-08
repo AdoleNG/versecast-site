@@ -169,8 +169,8 @@ export default function VerseCastMarketingSite() {
               </div>
 
               <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                Help your congregation follow the sermon with Bible on screen in
-                real time.
+                Keep your congregation engaged with Scripture displayed clearly and in real time whenever the Word is mentioned.
+                
               </h1>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
