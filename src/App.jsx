@@ -435,20 +435,18 @@ export default function VerseCastMarketingSite() {
                 </p>
               </div>
 
-              <div id="contact" className="mt-8 grid gap-4 sm:grid-cols-[1fr_auto]">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:border-[#2b124c]"
-                />
-                <button className="rounded-2xl bg-[#2b124c] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95">
-                  Book a Demo
-                </button>
+              <div id="contact" className="mt-8">
+                <iframe
+                  src="https://tally.so/embed/0QMkX6?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                  width="100%"
+                  height="300"
+                  frameBorder="0"
+                  marginHeight="0"
+                  marginWidth="0"
+                  title="VerseCast Waitlist"
+                ></iframe>
               </div>
-              <p className="mt-3 text-xs text-slate-500">
-                Swap this later for a real waitlist form, contact form, or
-                calendar booking link.
-              </p>
+
             </div>
           </div>
         </section>
