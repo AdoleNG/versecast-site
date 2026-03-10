@@ -431,7 +431,7 @@ export default function VerseCastMarketingSite() {
                 </h2>
                 <p className="mt-4 text-base leading-8 text-slate-600">
                   Request a live demo, join the early access list, or start
-                  conversations about using VerseCast in your ministry context.
+                  conversations about using VerseCast in your ministry.
                 </p>
               </div>
 
