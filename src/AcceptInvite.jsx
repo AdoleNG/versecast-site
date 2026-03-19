@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "./supabase";
+import { supabase } from "./supabaseclient";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
