@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "./supabaseClient.js";
+import { supabase } from "./supabaseClient.jsx";
 import VerseCastLogo from "./assets/VerseCastLogo.png";
 
 export default function Dashboard() {
