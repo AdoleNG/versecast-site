@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import VerseCastMarketingSite from "./VerseCastMarketingSite";
+
 import AcceptInvite from "./AcceptInvite";
 import InvitationSuccess from "./InvitationSuccess";
 import Login from "./Login";
@@ -13,13 +13,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public marketing site */}
-        <Route path="/" element={<VerseCastMarketingSite />} />
+        {/* React App Homepage */}
+        <Route path="/" element={<Login />} />
 
         {/* Operator onboarding */}
         <Route path="/accept-invite/:token" element={<AcceptInvite />} />
         <Route path="/invite-success" element={<InvitationSuccess />} />
-        
+
         {/* Auth */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -35,6 +35,3 @@ function App() {
 }
 
 export default App;
-
-
-
