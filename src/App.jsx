@@ -1,19 +1,19 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import AcceptInvite from "./AcceptInvite";
 import InvitationSuccess from "./InvitationSuccess";
 import Login from "./Login";
 import Signup from "./Signup";
-import Dashboard from "./Dashboard";
-import Sessions from "./Sessions";
-import ControlPanel from "./ControlPanel";
-import Presenter from "./Presenter";
 import AuthCallback from "./AuthCallback";
 import CreateChurch from "./CreateChurch";
 
-
-// OPTIONAL: placeholder pages if you don't have them yet
-const Operators = () => <div className="p-10">Operators Page (Coming Soon)</div>;
-const Settings = () => <div className="p-10">Settings Page (Coming Soon)</div>;
+// NEW DASHBOARD FILES
+import DashboardLayout from "./DashboardLayout";
+import DashboardHome from "./dashboard/DashboardHome";
+import StartSession from "./dashboard/StartSession";
+import EndSession from "./dashboard/EndSession";
+import SessionHistory from "./dashboard/SessionHistory";
+import InviteOperator from "./operators/InviteOperator";
 
 function App() {
   return (
@@ -34,18 +34,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* Dashboard */}
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* DASHBOARD (NEW STRUCTURE) */}
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<DashboardHome />} />
 
-        {/* Pages linked from sidebar */}
-        <Route path="/control-panel" element={<ControlPanel />} />
-        <Route path="/sessions" element={<Sessions />} />
-        <Route path="/operators" element={<Operators />} />
-        <Route path="/settings" element={<Settings />} />
+          {/* Sessions */}
+          <Route path="sessions/start-session" element={<StartSession />} />
+          <Route path="sessions/end-session" element={<EndSession />} />
+          <Route path="sessions/history" element={<SessionHistory />} />
 
-        {/* Presenter */}
-        <Route path="/control-panel/:sid" element={<ControlPanel />} />
-        <Route path="/presenter/:sid" element={<Presenter />} />
+          {/* Operators */}
+          <Route path="operators/invite" element={<InviteOperator />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

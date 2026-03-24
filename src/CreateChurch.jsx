@@ -10,13 +10,13 @@ export default function CreateChurch() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
     setLoading(true);
 
     try {
-      // Get current session token
+      // Get Supabase session token
       const { data } = await supabase.auth.getSession();
       const session = data.session;
 
@@ -29,14 +29,15 @@ export default function CreateChurch() {
       const token = session.access_token;
 
       // Call backend onboarding endpoint
-      const res = await fetch(
-        "https://versecast-backend.onrender.com/saas/onboarding/create-church",
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/saas/onboarding/create-church`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          credentials: "include",
           body: JSON.stringify({
             full_name: fullName,
             church_name: churchName,
@@ -44,23 +45,37 @@ export default function CreateChurch() {
         }
       );
 
-      if (!res.ok) {
-        const text = await res.text();
-        console.error("Create church error:", text);
+      // Handle non-200 responses
+      if (!response.ok) {
+        const err = await response.json().catch(() => null);
+        console.error("Create church failed:", err);
         setErrorMsg("Failed to create church. Please try again.");
         setLoading(false);
         return;
       }
 
-      // Success → redirect to dashboard
+      // Parse successful JSON response
+      const dataRes = await response.json();
+      console.log("Create church success:", dataRes);
+
+      // Validate expected fields
+      if (!dataRes.church_id || !dataRes.user_id) {
+        console.error("Unexpected response:", dataRes);
+        setErrorMsg("Unexpected server response. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      // Redirect to dashboard
       navigate("/dashboard");
+
     } catch (err) {
       console.error("Onboarding error:", err);
       setErrorMsg("Unexpected error. Please try again.");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
