@@ -301,3 +301,118 @@ export default function VerseCastMarketingSite() {
                   className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2b124c] text-lg font-bold text-[#f9e79f]">
+                    {num}
+                  </div>
+                  <h3 className="mt-5 text-xl font-semibold text-[#2b124c]">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* BENEFITS */}
+        <section id="benefits" className="py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl text-center">
+              <div className="text-sm font-semibold uppercase tracking-[0.22em] text-[#2b124c]">
+                Benefits
+              </div>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#2b124c] sm:text-4xl">
+                More ministry value, less technical distraction.
+              </h2>
+            </div>
+
+            <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {benefitCards.map(([title, text]) => (
+                <div
+                  key={title}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md"
+                >
+                  <div className="inline-flex rounded-2xl bg-[#f6f0ff] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#2b124c]">
+                    Value
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold text-[#2b124c]">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* PRICING */}
+        <section
+          id="pricing"
+          className="border-y border-slate-200 bg-slate-50 py-20"
+        >
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl text-center">
+              <div className="text-sm font-semibold uppercase tracking-[0.22em] text-[#2b124c]">
+                Pricing
+              </div>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#2b124c] sm:text-4xl">
+                Simple plans for church adoption.
+              </h2>
+              <p className="mt-4 text-base leading-8 text-slate-600">
+                Placeholder pricing for your marketing launch. You can adjust
+                these later when you finalize packaging.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 lg:grid-cols-3">
+              {pricingPlans.map(([title, price, features]) => (
+                <div
+                  key={title}
+                  className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
+                >
+                  <div className="text-lg font-semibold text-[#2b124c]">
+                    {title}
+                  </div>
+                  <div className="mt-3 text-4xl font-bold tracking-tight text-[#2b124c]">
+                    {price}
+                  </div>
+                  <ul className="mt-6 space-y-3 text-sm text-slate-600">
+                    {features.map((feature) => (
+                      <li key={feature}>• {feature}</li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact"
+                    className="mt-8 inline-flex rounded-2xl bg-[#2b124c] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-95"
+                  >
+                    Talk to Sales
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* WHO IT'S FOR */}
+        <section className="bg-[#2b124c] py-20 text-white">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+              <div>
+                <div className="text-sm font-semibold uppercase tracking-[0.22em] text-[#f9e79f]">
+                  Who it’s for
+                </div>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+                  Churches, conferences, and ministry teams that want Bible on
+                  screen without delay.
+                </h2>
+                <p className="mt-5 max-w-2xl text-base leading-8 text-slate-200">
+                  VerseCast is a strong fit for churches that value live
+                  teaching clarity, smoother media workflows, and a more
+                  connected congregational experience.
+                </p>
+              </div>
+
+              <div className="grid gap-4">
+                {useCases.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-white/15 bg-white/5 px-
