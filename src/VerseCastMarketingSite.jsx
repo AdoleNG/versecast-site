@@ -1,3 +1,4 @@
+import verseCastLogo from "./VerseCastLogo.png";
 export default function VerseCastMarketingSite() {
   const heroCards = [
     [
