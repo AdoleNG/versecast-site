@@ -13,7 +13,6 @@ import DashboardLayout from "./DashboardLayoutNew";
 import DashboardHome from "./dashboard/DashboardHomeNew";
 import StartSession from "./dashboard/StartSession";
 import EndSession from "./dashboard/EndSession";
-import SessionHistory from "./dashboard/SessionHistory";
 import OperatorsPage from "./OperatorsPage";
 import InviteOperator from "./operators/InviteOperator";
 

@@ -1,4 +1,3 @@
-import verseCastLogo from "./VerseCastLogo.jpg";
 
 export default function VerseCastMarketingSite() {
   const heroCards = [
