@@ -5,11 +5,6 @@ export default function VerseCastMarketingSite() {
       "AI-driven detection",
       "VerseCast listens during live preaching and detects Bible passages mentioned naturally by the minister.",
     ],
-      <img
-        src={verseCastLogo}
-        alt="VerseCast Logo"
-        className="h-10 w-auto"
-      />
     [
       "Less mental strain",
       "Reduces cognitive load for ministers and media teams during live services.",
@@ -126,46 +121,49 @@ export default function VerseCastMarketingSite() {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans">
       {/* HEADER */}
-      <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <div className="flex items-center gap-3">
-            <img
-            />
-            <div>
-              <div className="text-lg font-semibold tracking-tight text-[#2b124c]">
-                VerseCast
-              </div>
-              <div className="text-xs text-slate-500">
-                AI-driven Bible display for churches
-              </div>
-            </div>
-          </div>
-
-          <nav className="hidden items-center gap-8 text-sm text-slate-600 md:flex">
-            <a href="#how-it-works" className="transition hover:text-[#2b124c]">
-              How it works
-            </a>
-            <a href="#benefits" className="transition hover:text-[#2b124c]">
-              Benefits
-            </a>
-            <a href="#pricing" className="transition hover:text-[#2b124c]">
-              Pricing
-            </a>
-            <a href="#contact" className="transition hover:text-[#2b124c]">
-              Contact
-            </a>
-          </nav>
-
-          <div className="hidden md:block">
-            <a
-              href="#contact"
-              className="rounded-xl bg-[#2b124c] px-4 py-2 text-sm font-medium text-white transition hover:opacity-95"
-            >
-              Book a Demo
-            </a>
-          </div>
+<header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+  <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+    <div className="flex items-center gap-3">
+      <img
+        src={verseCastLogo}
+        alt="VerseCast Logo"
+        className="h-10 w-auto"
+      />
+      <div>
+        <div className="text-lg font-semibold tracking-tight text-[#2b124c]">
+          VerseCast
         </div>
-      </header>
+        <div className="text-xs text-slate-500">
+          AI-driven Bible display for churches
+        </div>
+      </div>
+    </div>
+
+    <nav className="hidden items-center gap-8 text-sm text-slate-600 md:flex">
+      <a href="#how-it-works" className="transition hover:text-[#2b124c]">
+        How it works
+      </a>
+      <a href="#benefits" className="transition hover:text-[#2b124c]">
+        Benefits
+      </a>
+      <a href="#pricing" className="transition hover:text-[#2b124c]">
+        Pricing
+      </a>
+      <a href="#contact" className="transition hover:text-[#2b124c]">
+        Contact
+      </a>
+    </nav>
+
+    <div className="hidden md:block">
+      <a
+        href="#contact"
+        className="rounded-xl bg-[#2b124c] px-4 py-2 text-sm font-medium text-white transition hover:opacity-95"
+      >
+        Book a Demo
+      </a>
+    </div>
+  </div>
+</header>
 
       {/* HERO SECTION */}
       <main>
