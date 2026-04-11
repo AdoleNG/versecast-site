@@ -52,7 +52,7 @@ export default function OperatorsPage() {
               style={{
                 display: "block",
                 width: "100%",
-                background: "#0078ff",
+                background: "#16a34a",
                 color: "white",
                 padding: "12px 18px",
                 borderRadius: "6px",

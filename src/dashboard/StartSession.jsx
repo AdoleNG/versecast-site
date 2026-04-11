@@ -1,17 +1,66 @@
+import { supabase } from "../supabaseClient";
+
 export default function StartSession() {
   const base = import.meta.env.VITE_KJV_URL;
 
-  const handleStart = (e) => {
+  const handleStart = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    console.log("Opening control...");
-    window.open(`${base}/control/demo`, "_blank", "noopener,noreferrer");
+    try {
+      // 1. Get Supabase token
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData.session?.access_token;
 
-    console.log("Opening presenter...");
-    window.open(`${base}/presenter/demo`, "_blank", "noopener,noreferrer");
+      if (!token) {
+        alert("No Supabase token found.");
+        return;
+      }
 
-    console.log("Both open calls executed.");
+      // 2. Create session in backend
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/sessions/start`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        }
+      );
+
+      if (!res.ok) {
+        const body = await res.text();
+        alert("Failed to start session: " + body);
+        return;
+      }
+
+      const json = await res.json();
+      const sessionId = json.id;
+
+      // ⭐ 3. REMOVE LOCAL WORKER — no more http://127.0.0.1:8765/start-worker
+      // Cloud STT runs directly inside the Control Panel now.
+
+      // ⭐ 4. Open Control Panel + Presenter using real session ID
+      // Pass token to Control Panel so STT can authenticate
+      window.open(
+        `${base}/control/${sessionId}?token=${token}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+      window.open(
+        `${base}/presenter/${sessionId}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+      alert("Session started.");
+    } catch (err) {
+      console.error(err);
+      alert("Could not start session.");
+    }
   };
 
   return (

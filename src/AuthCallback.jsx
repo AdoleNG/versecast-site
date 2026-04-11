@@ -8,28 +8,32 @@ export default function AuthCallback() {
   useEffect(() => {
     async function handleCallback() {
       try {
-        // Parse tokens from URL fragment (#)
+        // ===============================
+        // DEBUG LOGS (VERY IMPORTANT)
+        // ===============================
+        console.log("FULL URL:", window.location.href);
+        console.log("SEARCH:", window.location.search);
+        console.log("HASH:", window.location.hash);
+
+        // ===============================
+        // PARSE HASH (MAGIC LINK)
+        // ===============================
         const hash = window.location.hash.substring(1);
         const params = new URLSearchParams(hash);
 
         const access_token = params.get("access_token");
         const refresh_token = params.get("refresh_token");
 
-        // If no tokens → this is probably OAuth, not magic link
-        if (!access_token || !refresh_token) {
-          const { data, error } = await supabase.auth.exchangeCodeForSession(
-            window.location.href
-          );
+        console.log("access_token exists:", !!access_token);
+        console.log("refresh_token exists:", !!refresh_token);
 
-          if (error) {
-            console.error("OAuth callback error:", error);
-            navigate("/login");
-            return;
-          }
+        // ===============================
+        // HANDLE AUTH FLOW
+        // ===============================
+        if (access_token && refresh_token) {
+          // ✅ MAGIC LINK FLOW
+          console.log("Detected Magic Link flow");
 
-          // OAuth session stored → proceed to onboarding check
-        } else {
-          // MAGIC LINK FLOW — store session manually
           const { error } = await supabase.auth.setSession({
             access_token,
             refresh_token,
@@ -40,32 +44,64 @@ export default function AuthCallback() {
             navigate("/login");
             return;
           }
+
+          console.log("Magic link session stored successfully");
+        } else {
+          // ✅ OAUTH FALLBACK
+          console.log("No tokens in hash → attempting OAuth exchange");
+
+          const { data, error } = await supabase.auth.exchangeCodeForSession(
+            window.location.href
+          );
+
+          if (error) {
+            console.error("OAuth callback error:", error);
+            navigate("/login");
+            return;
+          }
+
+          console.log("OAuth session exchange success:", data);
         }
 
-        // Now check onboarding status
-        const { data } = await supabase.auth.getSession();
-        const session = data.session;
+        // ===============================
+        // GET SESSION
+        // ===============================
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+
+        console.log("Session after callback:", session);
 
         if (!session) {
+          console.error("No session found after auth");
           navigate("/login");
           return;
         }
 
+        // ===============================
+        // CHECK ONBOARDING STATUS
+        // ===============================
         const token = session.access_token;
 
         const res = await fetch(
           "https://versecast-backend.onrender.com/saas/onboarding/me",
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
 
+        console.log("Onboarding status code:", res.status);
+
         if (res.status === 404) {
+          console.log("User not onboarded → redirecting to Create Church");
           navigate("/create-church");
           return;
         }
 
         if (res.ok) {
+          console.log("User onboarded → redirecting to Dashboard");
           navigate("/dashboard");
           return;
         }

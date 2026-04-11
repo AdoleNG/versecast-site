@@ -41,33 +41,53 @@ export default function AcceptInvite() {
   }, [token]);
 
   async function handleAccept(e) {
-    e.preventDefault();
-    setError("");
-    setSubmitting(true);
+  e.preventDefault();
+  setError("");
+  setSubmitting(true);
 
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/operators/accept-invite`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token, full_name: fullName }),
-        }
-      );
+  try {
+    // 1. Get Supabase session
+    const { data } = await supabase.auth.getSession();
+    const session = data.session;
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.detail || "Unable to accept invitation.");
-      } else {
-        window.location.href = data.login_url;
-      }
-    } catch {
-      setError("Network error. Please try again.");
-    } finally {
+    if (!session) {
+      setError("You must be logged in to accept this invitation.");
       setSubmitting(false);
+      return;
     }
+
+    const accessToken = session.access_token;
+
+    // 2. Send token + full name + invite token
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/operators/accept-invite`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          token,
+          full_name: fullName,
+        }),
+      }
+    );
+
+    const dataRes = await res.json();
+
+    if (!res.ok) {
+      setError(dataRes.detail || "Unable to accept invitation.");
+    } else {
+      window.location.href = dataRes.login_url;
+    }
+  } catch {
+    setError("Network error. Please try again.");
+  } finally {
+    setSubmitting(false);
   }
+}
+
 
   if (loadingInvite) {
     return (
